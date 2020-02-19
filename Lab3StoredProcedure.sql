@@ -6,9 +6,6 @@ CREATE TABLE public.Spec(
     curMax          int             Not NULL
 );
 
-SELECT coalesce(NULL, NULL);--, 123,1234);
-
-
 --2
 INSERT INTO public.Spec(id, table_name, column_name, curMax)
     VALUES(1, 'spec', 'id', 1);
