@@ -6,6 +6,9 @@ CREATE TABLE public.Spec(
     curMax          int             Not NULL
 );
 
+SELECT coalesce(NULL, NULL);--, 123,1234);
+
+
 --2
 INSERT INTO public.Spec(id, table_name, column_name, curMax)
     VALUES(1, 'spec', 'id', 1);
@@ -14,19 +17,15 @@ INSERT INTO public.Spec(id, table_name, column_name, curMax)
 CREATE OR REPLACE FUNCTION get_next_number(_table_name varchar, _column_name varchar, out incremented_id integer) AS
     $$
     BEGIN
-        IF NOT EXISTS(SELECT * FROM spec where table_name = quote_ident(_table_name) and column_name = quote_ident(_column_name)) THEN
-            EXECUTE format('SELECT max(%I) FROM %I',quote_ident(_column_name), quote_ident(_table_name)) INTO incremented_id;
-            IF incremented_id is NULL THEN
-                incremented_id = 0;
-            end if;
-            incremented_id = incremented_id + 1;
+        IF NOT EXISTS(SELECT * FROM spec where table_name = (_table_name) and column_name = (_column_name)) THEN
+            EXECUTE format('SELECT coalesce(max(%I)+1,1) FROM %I',quote_ident(_column_name), quote_ident(_table_name)) INTO incremented_id;
             INSERT INTO public.Spec(id, table_name, column_name, curMax)
-               VALUES(get_next_number('spec', 'id'), quote_ident(_table_name), quote_ident(_column_name),incremented_id);
+               VALUES(get_next_number('spec', 'id'), (_table_name), (_column_name),incremented_id);
         ELSE
             UPDATE Spec
             SET curMax = curMax+1
-            WHERE table_name = quote_ident(_table_name) and column_name = quote_ident(_column_name);
-            incremented_id = (SELECT max(curMax) FROM Spec WHERE table_name = quote_ident(_table_name) and column_name = quote_ident(_column_name));
+            WHERE table_name = (_table_name) and column_name = (_column_name)
+            returning curMax into incremented_id;
         END IF;
     END;
     $$ LANGUAGE plpgsql;
