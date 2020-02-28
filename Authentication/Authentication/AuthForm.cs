@@ -14,7 +14,7 @@ namespace Authentication
 {
     public partial class AuthForm : Form
     {
-        private readonly Regex loginRegex = new Regex(@"^[~`""'!@№#;$%:^&?*()-_=+<>,./\|ёа-яa-z0-9 ]+$", RegexOptions.IgnoreCase);
+        private readonly Regex loginRegex = new Regex(@"^[~`""'!@№#;$%:^&?*(){}\[\]\-_=+<>,./\|ёа-яa-z0-9\s]+$", RegexOptions.IgnoreCase);
         private readonly string sConnStr = new Npgsql.NpgsqlConnectionStringBuilder
         {
             Host = "localhost",
