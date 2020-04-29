@@ -31,18 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvRam = new System.Windows.Forms.ListView();
+            this.btHelp = new System.Windows.Forms.Button();
+            this.btAggregate = new System.Windows.Forms.Button();
+            this.btCommit = new System.Windows.Forms.Button();
+            this.btRollebackTo = new System.Windows.Forms.Button();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.btInsert = new System.Windows.Forms.Button();
             this.btRollback = new System.Windows.Forms.Button();
             this.btSavepoint = new System.Windows.Forms.Button();
             this.btTransStart = new System.Windows.Forms.Button();
             this.cbMode = new System.Windows.Forms.ComboBox();
             this.isolationLabel = new System.Windows.Forms.Label();
-            this.btInsert = new System.Windows.Forms.Button();
-            this.btUpdate = new System.Windows.Forms.Button();
-            this.btRollebackTo = new System.Windows.Forms.Button();
-            this.btCommit = new System.Windows.Forms.Button();
-            this.btAggregate = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btHelp = new System.Windows.Forms.Button();
+            this.btFST = new System.Windows.Forms.Button();
+            this.btSST = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +63,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btSST);
+            this.splitContainer1.Panel2.Controls.Add(this.btFST);
             this.splitContainer1.Panel2.Controls.Add(this.btHelp);
             this.splitContainer1.Panel2.Controls.Add(this.btAggregate);
             this.splitContainer1.Panel2.Controls.Add(this.btCommit);
@@ -72,7 +76,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btTransStart);
             this.splitContainer1.Panel2.Controls.Add(this.cbMode);
             this.splitContainer1.Panel2.Controls.Add(this.isolationLabel);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 506);
             this.splitContainer1.SplitterDistance = 527;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -82,10 +86,82 @@
             this.lvRam.HideSelection = false;
             this.lvRam.Location = new System.Drawing.Point(0, 0);
             this.lvRam.Name = "lvRam";
-            this.lvRam.Size = new System.Drawing.Size(527, 450);
+            this.lvRam.Size = new System.Drawing.Size(527, 506);
             this.lvRam.TabIndex = 0;
             this.lvRam.UseCompatibleStateImageBehavior = false;
             this.lvRam.View = System.Windows.Forms.View.Details;
+            // 
+            // btHelp
+            // 
+            this.btHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btHelp.Location = new System.Drawing.Point(6, 471);
+            this.btHelp.Name = "btHelp";
+            this.btHelp.Size = new System.Drawing.Size(260, 23);
+            this.btHelp.TabIndex = 10;
+            this.btHelp.Text = "Help";
+            this.btHelp.UseVisualStyleBackColor = true;
+            this.btHelp.Click += new System.EventHandler(this.btHelp_Click);
+            // 
+            // btAggregate
+            // 
+            this.btAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAggregate.Location = new System.Drawing.Point(6, 226);
+            this.btAggregate.Name = "btAggregate";
+            this.btAggregate.Size = new System.Drawing.Size(260, 23);
+            this.btAggregate.TabIndex = 9;
+            this.btAggregate.Text = "Aggregate Function";
+            this.btAggregate.UseVisualStyleBackColor = true;
+            this.btAggregate.Click += new System.EventHandler(this.btAggregate_Click);
+            // 
+            // btCommit
+            // 
+            this.btCommit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCommit.Location = new System.Drawing.Point(6, 139);
+            this.btCommit.Name = "btCommit";
+            this.btCommit.Size = new System.Drawing.Size(260, 23);
+            this.btCommit.TabIndex = 8;
+            this.btCommit.Text = "Commit";
+            this.btCommit.UseVisualStyleBackColor = true;
+            this.btCommit.Click += new System.EventHandler(this.btCommit_Click);
+            // 
+            // btRollebackTo
+            // 
+            this.btRollebackTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRollebackTo.Location = new System.Drawing.Point(6, 110);
+            this.btRollebackTo.Name = "btRollebackTo";
+            this.btRollebackTo.Size = new System.Drawing.Size(260, 23);
+            this.btRollebackTo.TabIndex = 7;
+            this.btRollebackTo.Text = "Rollback To SavePoint";
+            this.btRollebackTo.UseVisualStyleBackColor = true;
+            this.btRollebackTo.Click += new System.EventHandler(this.btRollebackTo_Click);
+            // 
+            // btUpdate
+            // 
+            this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btUpdate.Location = new System.Drawing.Point(6, 313);
+            this.btUpdate.Name = "btUpdate";
+            this.btUpdate.Size = new System.Drawing.Size(260, 23);
+            this.btUpdate.TabIndex = 6;
+            this.btUpdate.Text = "\"Select Table\"";
+            this.btUpdate.UseVisualStyleBackColor = true;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
+            // 
+            // btInsert
+            // 
+            this.btInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btInsert.Location = new System.Drawing.Point(6, 197);
+            this.btInsert.Name = "btInsert";
+            this.btInsert.Size = new System.Drawing.Size(260, 23);
+            this.btInsert.TabIndex = 5;
+            this.btInsert.Text = "Insert";
+            this.btInsert.UseVisualStyleBackColor = true;
+            this.btInsert.Click += new System.EventHandler(this.btInsert_Click);
             // 
             // btRollback
             // 
@@ -145,83 +221,31 @@
             this.isolationLabel.TabIndex = 0;
             this.isolationLabel.Text = "Isolation level";
             // 
-            // btInsert
+            // btFST
             // 
-            this.btInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btInsert.Location = new System.Drawing.Point(6, 197);
-            this.btInsert.Name = "btInsert";
-            this.btInsert.Size = new System.Drawing.Size(260, 23);
-            this.btInsert.TabIndex = 5;
-            this.btInsert.Text = "Insert";
-            this.btInsert.UseVisualStyleBackColor = true;
-            this.btInsert.Click += new System.EventHandler(this.btInsert_Click);
+            this.btFST.Location = new System.Drawing.Point(6, 255);
+            this.btFST.Name = "btFST";
+            this.btFST.Size = new System.Drawing.Size(260, 23);
+            this.btFST.TabIndex = 11;
+            this.btFST.Text = "First Serializable transaction";
+            this.btFST.UseVisualStyleBackColor = true;
+            this.btFST.Click += new System.EventHandler(this.btFST_Click);
             // 
-            // btUpdate
+            // btSST
             // 
-            this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btUpdate.Location = new System.Drawing.Point(6, 255);
-            this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(260, 23);
-            this.btUpdate.TabIndex = 6;
-            this.btUpdate.Text = "\"Select Table\"";
-            this.btUpdate.UseVisualStyleBackColor = true;
-            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
-            // 
-            // btRollebackTo
-            // 
-            this.btRollebackTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRollebackTo.Location = new System.Drawing.Point(6, 110);
-            this.btRollebackTo.Name = "btRollebackTo";
-            this.btRollebackTo.Size = new System.Drawing.Size(260, 23);
-            this.btRollebackTo.TabIndex = 7;
-            this.btRollebackTo.Text = "Rollback To SavePoint";
-            this.btRollebackTo.UseVisualStyleBackColor = true;
-            this.btRollebackTo.Click += new System.EventHandler(this.btRollebackTo_Click);
-            // 
-            // btCommit
-            // 
-            this.btCommit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCommit.Location = new System.Drawing.Point(6, 139);
-            this.btCommit.Name = "btCommit";
-            this.btCommit.Size = new System.Drawing.Size(260, 23);
-            this.btCommit.TabIndex = 8;
-            this.btCommit.Text = "Commit";
-            this.btCommit.UseVisualStyleBackColor = true;
-            this.btCommit.Click += new System.EventHandler(this.btCommit_Click);
-            // 
-            // btAggregate
-            // 
-            this.btAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAggregate.Location = new System.Drawing.Point(6, 226);
-            this.btAggregate.Name = "btAggregate";
-            this.btAggregate.Size = new System.Drawing.Size(260, 23);
-            this.btAggregate.TabIndex = 9;
-            this.btAggregate.Text = "Aggregate Function";
-            this.btAggregate.UseVisualStyleBackColor = true;
-            this.btAggregate.Click += new System.EventHandler(this.btAggregate_Click);
-            // 
-            // btHelp
-            // 
-            this.btHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btHelp.Location = new System.Drawing.Point(6, 415);
-            this.btHelp.Name = "btHelp";
-            this.btHelp.Size = new System.Drawing.Size(260, 23);
-            this.btHelp.TabIndex = 10;
-            this.btHelp.Text = "Help";
-            this.btHelp.UseVisualStyleBackColor = true;
-            this.btHelp.Click += new System.EventHandler(this.btHelp_Click);
+            this.btSST.Location = new System.Drawing.Point(6, 284);
+            this.btSST.Name = "btSST";
+            this.btSST.Size = new System.Drawing.Size(260, 23);
+            this.btSST.TabIndex = 12;
+            this.btSST.Text = "Second Serializable transaction";
+            this.btSST.UseVisualStyleBackColor = true;
+            this.btSST.Click += new System.EventHandler(this.btSST_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 506);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "Тут происходят транзакции";
@@ -250,6 +274,8 @@
         private System.Windows.Forms.Button btAggregate;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button btHelp;
+        private System.Windows.Forms.Button btSST;
+        private System.Windows.Forms.Button btFST;
     }
 }
 

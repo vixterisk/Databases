@@ -72,7 +72,10 @@ namespace TransactionApp
             sCommand.ExecuteNonQuery();
             InitializeLvVideocard();
         }
+        private void btInsert4_Click(object sender, EventArgs e)
+        {
 
+        }
         private void btTransStart_Click(object sender, EventArgs e)
         {
             var sCommand = new NpgsqlCommand
@@ -122,37 +125,66 @@ namespace TransactionApp
 
         private void btCommit_Click(object sender, EventArgs e)
         {
-            var sCommand = new NpgsqlCommand
+            try
             {
-                Connection = sConn,
-                CommandText = @"Commit;"
-            };
-            sCommand.ExecuteNonQuery();
-            InitializeLvVideocard();
+                var sCommand = new NpgsqlCommand
+                {
+                    Connection = sConn,
+                    CommandText = @"Commit;"
+                };
+                sCommand.ExecuteNonQuery();
+                InitializeLvVideocard();
+            }
+            catch(Npgsql.NpgsqlException)
+            {
+                MessageBox.Show("Ого, кажется, что-то пошло не так! Понадобится повторная транзакция :(", "Ошибка сериализации");                
+            }
         }
-
+        long count2;
         private void btAggregate_Click(object sender, EventArgs e)
         {
             var sCommand = new NpgsqlCommand
             {
                 Connection = sConn,
-                CommandText = @"select count(*) from pcbs.ram_information  where ram_memory_size = 2;"
+                CommandText = @"select sum(ram_id) from pcbs.ram_information  where ram_memory_size = 2;"
             };
-            var count = (long)sCommand.ExecuteScalar();
-            MessageBox.Show("Количество строк в таблице, где значение количества памяти четно: " + count);
+            count2 = (long)sCommand.ExecuteScalar();
+            MessageBox.Show("Сумма идентификаторов в таблице, где значение количества памяти = 2: " + count2);
         }
-
         private void btHelp_Click(object sender, EventArgs e)
         {
             var message = @"Уровень read committed — Аномалия ""Неповторяющееся чтение"". 
 Повторное чтение элемента данных дает другой результат, поскольку значение элемента было изменено другой транзакцией.
 
-Уровень repeatable read - Аномалия ""Фантомное чтение"". 
-Повторный поиск данных по предикату возвращает результат, отличающийся от первого, потому что другая транзакция 
-добавила, удалила или изменила записи таким образом, что они стали удовлетворять (или перестали удовлетворять) предикату.
+Уровень repeatable read - Аномалия ""Сериализации"". 
+Ситуация, когда параллельное выполнение транзакций приводит к результату, невозможному при последовательном выполнении тех же транзакций.
 
 Уровень serializable - Транзакции полностью изолируются друг от друга, каждая выполняется так, как будто параллельных транзакций не существует.";
             MessageBox.Show(message, "Уровни изоляции");
+        }
+
+        private void btFST_Click(object sender, EventArgs e)
+        {
+            var sCommand = new NpgsqlCommand
+            {
+                Connection = sConn,
+                CommandText = @"insert into pcbs.ram_information (ram_model,ram_memory_size)
+                            select count(*),4 as sum from pcbs.ram_information where ram_memory_size = 2;"
+            };
+            sCommand.ExecuteNonQuery();
+            InitializeLvVideocard();
+        }
+
+        private void btSST_Click(object sender, EventArgs e)
+        {
+            var sCommand = new NpgsqlCommand
+            {
+                Connection = sConn,
+                CommandText = @"insert into pcbs.ram_information (ram_model,ram_memory_size)
+                            select count(*),2 as sum from pcbs.ram_information where ram_memory_size = 4;"
+            };
+            sCommand.ExecuteNonQuery();
+            InitializeLvVideocard();
         }
     }
 }
