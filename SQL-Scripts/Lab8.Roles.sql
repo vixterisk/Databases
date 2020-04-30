@@ -70,7 +70,7 @@ $$
     END;
 $$;
 
-SET ROLE postgres;
+SET ROLE None;
 --Пользователи могут просматривать все таблицы, но не могут ничего редактировать
 CREATE USER pcbs_user WITH PASSWORD 'qwerty';
 
@@ -132,7 +132,7 @@ $$
     END;
 $$;
 
-SET ROLE postgres;
+SET ROLE None;
 --Техники могут просматривать и редактировать таблицы, относящиеся к сборке и конфигурации пк,
 --только просматривать таблицы, относящиеся к моделям оборудования и производителям
 CREATE USER pcbs_configurator WITH PASSWORD '2468';
@@ -191,7 +191,7 @@ $$
     END;
 $$;
 
-SET ROLE postgres;
+SET ROLE None;
 --Производители могут просматривать сборки ПК,
 -- просматривать информацию о моделях оборудования и редактировать информацию о своих
 -- просматривать информацию о производителях и редактировать свою
@@ -297,7 +297,7 @@ $$
     END;
 $$;
 
-set role postgres;
+set role None;
 
 create user zalman;
 grant pcbs_maker to zalman;
@@ -319,7 +319,7 @@ $$
     END;
 $$;
 
-set role postgres;
+set role None;
 -- Удаление всего
 alter table maker
 disable row level security;
