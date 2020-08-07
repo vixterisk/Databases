@@ -103,6 +103,5 @@ namespace ListViewIUD
             else
                 errorProviderPassword.Clear();
         }
-        
     }
 }
